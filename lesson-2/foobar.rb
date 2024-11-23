@@ -12,5 +12,3 @@ def foobar(num1, num2)
     return num1 + num2
   end
 end
-
-puts foobar(num1, num2)
