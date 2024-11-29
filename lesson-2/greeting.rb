@@ -1,5 +1,5 @@
 
-def greeting
+def greeting()
 
   puts "Введите ваше имя: "
   first_name = gets.chomp
