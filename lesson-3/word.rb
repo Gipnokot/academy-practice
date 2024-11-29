@@ -7,10 +7,11 @@ def user_input_word
   puts 'Введите слово: '
   input_word = gets.chomp
     if input_word == ''
-      puts 'Вы не ввели слово. Попробуйте еще раз.'
+      puts 'Введите слово!'
       user_input_word
+    else
+      puts word(input_word)
     end
-  puts word(input_word)
 end
 
 user_input_word
