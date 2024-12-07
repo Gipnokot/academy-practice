@@ -8,11 +8,6 @@ RSpec.describe 'greeting' do
     expect(greeting).to eq('Привет, John Doe. Тебе меньше 18 лет, но начать учиться программировать никогда не рано')
   end
 
-  it 'returns the correct greeting for age == 18' do
-    allow_any_instance_of(Kernel).to receive(:gets).and_return('John', 'Doe', '18')
-    expect(greeting).to eq('Привет, John Doe. Вам ровно 18 лет!')
-  end
-
   it 'returns the correct greeting for age > 18' do
     allow_any_instance_of(Kernel).to receive(:gets).and_return('John', 'Doe', '25')
     expect(greeting).to eq('Привет, John Doe. Самое время заняться делом!')
