@@ -1,19 +1,21 @@
 # frozen_string_literal: true
 
 FILE_PATH = 'file_manager.txt'
-File.open(FILE_PATH)
 BUFFER_PATH = 'buffer.txt'
-File.read(BUFFER_PATH)
 
 def index(file)
   file_data = File.read(file)
   puts file_data
 end
 
+index(FILE_PATH)
+
 def find(id, file)
   file_data = File.readlines(file).map(&:chomp)
   puts file_data[id]
 end
+
+find(0, FILE_PATH)
 
 def where(pattern, file)
   matched_lines = []
@@ -23,7 +25,9 @@ def where(pattern, file)
   puts matched_lines
 end
 
-def update(id, text, file, _buffer)
+where('ruby', FILE_PATH)
+
+def update(id, text, file)
   File.open(BUFFER_PATH, 'w') do |buffer_file|
     File.foreach(file).with_index do |line, index|
       if id == index
@@ -34,20 +38,31 @@ def update(id, text, file, _buffer)
     end
   end
 
-  File.write(file, File.read(BUFFER_PATH))
-end
-
-def delete(id, file, _buffer_file)
-  File.open(buffer_path, 'w')
-  File.foreach(file_path).with_index do |line, index|
-    file.puts(line) unless id == index
+  File.open(file, 'w') do |orig_file|
+    File.foreach(BUFFER_PATH) do |line|
+      orig_file.puts(line)
+    end
   end
-  file.close
-  File.write(file_path, File.read(buffer_path))
 end
 
-def create(text, _file_)
-  file = File.open(file_path, 'a')
-  file.puts(text)
-  file.close
+update(0, 'ruby', FILE_PATH)
+
+def delete(id, file)
+  File.open(BUFFER_PATH, 'w') do |buffer_file|
+    File.foreach(file).with_index do |line, index|
+      buffer_file.puts(line) unless id == index
+    end
+  end
+
+  File.open(file, 'w') do |orig_file|
+    File.foreach(BUFFER_PATH) do |line|
+      orig_file.puts(line)
+    end
+  end
+end
+
+def create(text, file)
+  File.open(file, 'a') do |f|
+    f.puts(text)
+  end
 end
