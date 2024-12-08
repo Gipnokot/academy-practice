@@ -8,24 +8,19 @@ def index(file)
   puts file_data
 end
 
-index(FILE_PATH)
-
 def find(id, file)
   file_data = File.readlines(file).map(&:chomp)
   puts file_data[id]
 end
 
-find(0, FILE_PATH)
 
 def where(pattern, file)
   matched_lines = []
-  file.each_line do |line|
-    matched_lines.push(line.chomp) if line.include?(pattern)
+  File.foreach(file) do |line|
+    matched_lines << line.chomp if line.include?(pattern)
   end
-  puts matched_lines
+  puts matched_lines.to_s
 end
-
-where('ruby', FILE_PATH)
 
 def update(id, text, file)
   File.open(BUFFER_PATH, 'w') do |buffer_file|
@@ -45,8 +40,6 @@ def update(id, text, file)
   end
 end
 
-update(0, 'ruby', FILE_PATH)
-
 def delete(id, file)
   File.open(BUFFER_PATH, 'w') do |buffer_file|
     File.foreach(file).with_index do |line, index|
@@ -62,7 +55,5 @@ def delete(id, file)
 end
 
 def create(text, file)
-  File.open(file, 'a') do |f|
-    f.puts(text)
-  end
+  File.open(file, 'a') { |f| f.puts(text) }
 end
