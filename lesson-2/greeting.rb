@@ -10,8 +10,6 @@ def greeting()
   
   if age < 18
     "Привет, #{first_name} #{last_name}. Тебе меньше 18 лет, но начать учиться программировать никогда не рано"
-  elsif age == 18
-    "Привет, #{first_name} #{last_name}. Вам ровно 18 лет!"
   else
     "Привет, #{first_name} #{last_name}. Самое время заняться делом!"
   end
