@@ -4,6 +4,8 @@ class CashMachine
   FILE_PATH = 'balance.txt'
   DEFAULT_BALANCE = 100.0
 
+  attr_accessor :balance
+
   def initialize
     @balance = read_balance
   end
