@@ -9,7 +9,7 @@ class CashMachine
   end
 
   def deposit(amount)
-    if amount <= 0
+    unless amount.positive?
       { error: 'Сумма депозита должна быть больше нуля!' }
     else
       @balance += amount
@@ -19,9 +19,13 @@ class CashMachine
   end
 
   def withdraw(amount)
-    if amount <= 0
-      { error: 'Сумма вывода должна быть больше нуля!' }
-    elsif amount <= @balance
+    # Используем positive? для проверки, что сумма больше нуля
+    unless amount.positive?
+      return { error: 'Сумма вывода должна быть больше нуля!' }
+    end
+
+    # Проверяем, хватает ли средств на счете
+    if amount <= @balance
       @balance -= amount
       save_balance
       { success: "Вывод успешен. Ваш новый баланс: #{@balance} руб." }

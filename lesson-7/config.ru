@@ -1,3 +1,3 @@
-require_relative 'app'
+require_relative 'rack_app'
 
 run RackApp.new
