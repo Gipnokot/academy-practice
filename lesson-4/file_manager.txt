@@ -1,4 +1,0 @@
-ruby
-ruby on rails
-hello world
-asdasdas
