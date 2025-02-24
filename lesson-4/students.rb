@@ -1,50 +1,52 @@
-
+# frozen_string_literal: true
 FILE_PATH = 'students.txt'
-BUFFER = 'buffer.txt'
-RESULT = 'results.txt'
+BUFFER_PATH = 'buffer.txt'
+RESULT_PATH = 'results.txt'
 
-def index(file)
-  file_data = File.read(file)
-  puts file_data
+def index
+  file_data = File.read(FILE_PATH)
+  if file_data.strip.empty?
+    puts "Файл пуст."
+  else
+    puts file_data
+  end
 end
 
-def delete(lines, file, buffer)
-  buffer = File.open(BUFFER, 'w') do |buffer_line|
+def delete(lines)
+  File.open(BUFFER_PATH, 'w') do |buffer_file|
     File.foreach(FILE_PATH) do |line|
-      buffer_line.puts line.chomp unless lines.include?(line.chomp)
+      buffer_file.puts(line.chomp) unless lines.include?(line.chomp)
     end
   end
-
-  File.write(FILE_PATH, File.read(BUFFER))
-  File.delete(BUFFER) if File.exist?(BUFFER)
+  File.write(FILE_PATH, File.read(BUFFER_PATH))
+  File.delete(BUFFER_PATH) if File.exist?(BUFFER_PATH)
 end
 
-def find(file, pattern, result)
+def find(pattern)
   matched_lines = []
-  File.open(RESULT, 'a') do |result_line|
-    File.foreach(file) do |line|
+  File.open(RESULT_PATH, 'a') do |result_file|
+    File.foreach(FILE_PATH) do |line|
       if line.include?(pattern.to_s)
         matched_lines.push(line.chomp)
-        result_line.puts line.chomp
+        result_file.puts(line.chomp)
       end
     end
   end
-  delete(matched_lines, FILE_PATH, BUFFER)
+  delete(matched_lines)
 end
 
 loop do
-  file = File.open(FILE_PATH)
-  if file.read.empty?
-    puts "Все студенты записаны в #{RESULT}"
-    index(RESULT)
+  if File.read(FILE_PATH).strip.empty?
+    puts "Все студенты записаны в #{RESULT_PATH}"
+    index(RESULT_PATH)
     break
   end
   puts 'Введите возраст студента или -1 чтобы выйти: '
   students_age = gets.chomp.to_i
   if students_age == -1
-    index(RESULT)
+    index(RESULT_PATH)
     break
   else
-    find(FILE_PATH, students_age, RESULT)
+    find(students_age)
   end
 end

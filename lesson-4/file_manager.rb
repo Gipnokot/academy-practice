@@ -3,57 +3,74 @@
 FILE_PATH = 'file_manager.txt'
 BUFFER_PATH = 'buffer.txt'
 
-def index(file)
-  file_data = File.read(file)
+def valid_id?(id, lines)
+  if id > 0 && id <= lines.length
+    true
+  else
+    puts "Строка с индексом #{id} не найдена!"
+    false
+  end
+end
+
+def read_file
+  File.readlines(FILE_PATH).map(&:chomp)
+end
+
+def write_to_buffer(lines)
+  File.open(BUFFER_PATH, 'w') do |buffer_file|
+    lines.each do |line|
+      buffer_file.puts(line)
+    end
+  end
+end
+
+def overwrite_original_file
+  File.open(FILE_PATH, 'w') do |orig_file|
+    File.foreach(BUFFER_PATH) do |line|
+      orig_file.puts(line.chomp)
+    end
+  end
+end
+
+def index
+  file_data = File.read(FILE_PATH)
   puts file_data
 end
 
-def find(id, file)
-  file_data = File.readlines(file).map(&:chomp)
-  puts file_data[id]
+def find(id)
+  lines = read_file
+  if valid_id?(id, lines)
+    puts lines[id - 1]
+  end
 end
 
-
-def where(pattern, file)
+def where(pattern)
   matched_lines = []
-  File.foreach(file) do |line|
+  File.foreach(FILE_PATH) do |line|
     matched_lines << line.chomp if line.include?(pattern)
   end
-  puts matched_lines.to_s
+  puts matched_lines.join("\n") unless matched_lines.empty?
+  puts "Шаблон '#{pattern}' не найден." if matched_lines.empty?
 end
 
-def update(id, text, file)
-  File.open(BUFFER_PATH, 'w') do |buffer_file|
-    File.foreach(file).with_index do |line, index|
-      if id == index
-        buffer_file.puts(text)
-      else
-        buffer_file.puts(line)
-      end
-    end
-  end
-
-  File.open(file, 'w') do |orig_file|
-    File.foreach(BUFFER_PATH) do |line|
-      orig_file.puts(line)
-    end
+def update(id, text)
+  lines = read_file
+  if valid_id?(id, lines)
+    lines[id - 1] = text
+    write_to_buffer(lines)
+    overwrite_original_file
   end
 end
 
-def delete(id, file)
-  File.open(BUFFER_PATH, 'w') do |buffer_file|
-    File.foreach(file).with_index do |line, index|
-      buffer_file.puts(line) unless id == index
-    end
-  end
-
-  File.open(file, 'w') do |orig_file|
-    File.foreach(BUFFER_PATH) do |line|
-      orig_file.puts(line)
-    end
+def delete(id)
+  lines = read_file
+  if valid_id?(id, lines)
+    lines.delete_at(id - 1)
+    write_to_buffer(lines)
+    overwrite_original_file
   end
 end
 
-def create(text, file)
-  File.open(file, 'a') { |f| f.puts(text) }
+def create(text)
+  File.open(FILE_PATH, 'a') { |f| f.puts(text) }
 end
