@@ -1,0 +1,23 @@
+<h1>Create new lab report<h1>
+
+<%= form_with model: @lab_report do |f| %>
+<div>
+  <%= f.label :title, "Lab title" %>
+  <%= f.text_field :title, required: true %>
+</div>
+
+<div>
+  <%= f.label :description, "Lab description" %>
+  <%= f.text_area :description %>
+</div>
+
+<div>
+  <%= f.label :grade, "Grade" %>
+  <%= f.select :grade, LabReport::GRADES.map { |grade| [grade, grade] }, include_blank: "Not rated" %>
+</div>
+
+<div>
+  <%= f.submit "Create Lab report" %>
+</div>
+
+<%= link_to "Back", lab_reports_path %>
