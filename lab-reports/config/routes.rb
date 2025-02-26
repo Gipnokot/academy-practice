@@ -1,3 +1,5 @@
 Rails.application.routes.draw do
-  root "posts#index"
+  resources :users
+  resources :lab_reports
+  root "lab_reports#index"
 end
