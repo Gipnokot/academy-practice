@@ -1,0 +1,15 @@
+<h1>User profile: <%= @user.first_name %> <%= @user.last_name %></h1>
+
+<p><strong>Email:</strong> <%= @user.email %></p>
+
+<h2>User Lab reports:</h2>
+<ul>
+  <% @user.lab_reports.each do |report| %>
+    <li>
+      <%= link_to report.title, lab_report_path(report) %> — <%= report.grade %>
+    </li>
+  <% end %>
+</ul>
+
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>
