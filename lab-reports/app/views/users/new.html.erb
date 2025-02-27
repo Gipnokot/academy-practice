@@ -1,24 +1,27 @@
-<h1>User Create:</h1>
+<h1 class="text-4xl font-bold text-center mb-8 text-primary-700">Create User</h1>
 
-<%= form_with model: @user do |f| %>
-<div>
-  <%= f.label :first_name, "First Name" %>
-  <%= f.text_field :first_name, required: true %>
+<div class="max-w-lg mx-auto bg-white p-8 rounded-lg shadow-lg animate-fade-in">
+  <%= form_with model: @user, local: true, class: "space-y-6" do |f| %>
+
+    <div class="form-control">
+      <%= f.label :first_name, "First Name", class: "label font-semibold text-gray-700" %>
+      <%= f.text_field :first_name, required: true, class: "input input-bordered w-full py-2 px-3 rounded-md" %>
+    </div>
+
+    <div class="form-control">
+      <%= f.label :last_name, "Last Name", class: "label font-semibold text-gray-700" %>
+      <%= f.text_field :last_name, required: true, class: "input input-bordered w-full py-2 px-3 rounded-md" %>
+    </div>
+
+    <div class="form-control">
+      <%= f.label :email, "Email", class: "label font-semibold text-gray-700" %>
+      <%= f.email_field :email, required: true, class: "input input-bordered w-full py-2 px-3 rounded-md" %>
+    </div>
+
+    <div class="flex justify-between gap-4 mt-6">
+      <%= f.submit "Create User", class: "btn btn-primary flex-1 py-2 px-6 rounded-md shadow-md hover:shadow-xl" %>
+      <%= link_to "Back", users_path, class: "btn btn-outline flex-1 py-2 px-6 rounded-md text-gray-700 border-gray-300 hover:text-primary-700 hover:border-primary-700" %>
+    </div>
+
+  <% end %>
 </div>
-
-<div>
-  <%= f.label :last_name, "Last Name" %>
-  <%= f.text_field :last_name, required: true %>
-</div>
-
-<div>
-  <%= f.label :email, "Email" %>
-  <%= f.email_field :email, required: true %>
-</div>
-
-<div>
-  <%= f.submit "Create user" %>
-</div>
-<% end %>
-
-<%= link_to "Back to users list", users_path %>

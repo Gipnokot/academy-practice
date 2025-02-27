@@ -1,0 +1,23 @@
+<h1 class="text-4xl font-bold text-center mb-10 text-primary-700">All Users</h1>
+
+<div class="container mx-auto px-6">
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <% @users.each do |user| %>
+      <div class="card bg-white shadow-lg hover:shadow-2xl transition-shadow duration-300 p-6 rounded-xl">
+        <div class="card-body">
+          <h2 class="card-title text-xl font-semibold text-primary-800"><%= user.first_name %> <%= user.last_name %></h2>
+          <p class="text-gray-600 mb-4"><%= user.email %></p>
+
+          <div class="mt-4 flex gap-4 justify-center">
+            <%= link_to "Edit", edit_user_path(user), class: "btn btn-secondary py-2 px-6 rounded-md" %>
+            <%= button_to "Delete", user_path(user), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-error py-2 px-6 rounded-md" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="flex justify-center mt-8">
+    <%= link_to "Add User", new_user_path, class: "btn btn-primary text-lg px-6 py-3 shadow-xl hover:shadow-2xl rounded-md" %>
+  </div>
+</div>

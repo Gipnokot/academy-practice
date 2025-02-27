@@ -1,11 +1,21 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <%= render 'layouts/head' %>
-  </head>
-  <body>
-    <main class="container mx-auto mt-28 px-5 flex">
-      <%= yield %>
-    </main>
-  </body>
+<html lang="en">
+<head>
+  <%= render 'layouts/head' %>
+</head>
+<body class="bg-gray-50 text-gray-800 dark:bg-gray-800 dark:text-gray-100 font-sans">
+
+
+  <!-- nav -->
+  <%= render 'layouts/navigation' %>
+
+  <!-- content -->
+  <main class="container mx-auto mt-32 px-5 max-w-screen-lg animate-fade-in">
+    <%= yield %>
+  </main>
+
+  <!-- footer -->
+  <%= render 'layouts/footer' %>
+
+</body>
 </html>

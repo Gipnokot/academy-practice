@@ -1,0 +1,110 @@
+/* main */
+.container {
+  @apply max-w-screen-lg mx-auto p-6 bg-gray-50; /* светлый фон */
+}
+
+/* headers */
+h1 {
+  @apply text-4xl font-extrabold text-center mb-6 text-primary-800; /* более мягкий основной цвет */
+}
+
+h2 {
+  @apply text-2xl font-semibold mb-4 text-gray-800; /* более мягкий текст для подзаголовков */
+}
+
+/* cards */
+.card-custom {
+  @apply bg-white shadow-md hover:shadow-lg transition-all duration-300 rounded-lg p-6; /* светлый фон для карточек */
+  background-color: #ffffff; /* белый фон карточек */
+  border: 1px solid #e5e7eb; /* легкий сероватый контур */
+}
+
+.card-custom:hover {
+  @apply shadow-lg; /* легкая тень при наведении */
+}
+
+/* forms */
+.form-input {
+  @apply input input-bordered w-full py-2 px-3 rounded-md;
+  background-color: #f3f4f6; /* светло-серый фон для полей ввода */
+  border-color: #d1d5db; /* светло-серый контур */
+}
+
+.form-input:focus {
+  @apply border-primary-400 ring-2 ring-primary-200; /* более мягкое выделение при фокусе */
+}
+
+.form-label {
+  @apply label font-semibold text-gray-700;
+  color: #6b7280; /* мягкий серый цвет для меток */
+}
+
+/* buttons */
+.btn-primary {
+  @apply btn btn-primary btn-wide py-2 px-6 rounded-md;
+  background-color: #3b82f6; /* мягкий синий */
+  color: white;
+}
+
+.btn-primary:hover {
+  @apply bg-blue-500; /* чуть более насыщенный синий на ховере */
+}
+
+.btn-secondary {
+  @apply btn btn-outline py-2 px-6 rounded-md;
+  border-color: #d1d5db;
+  color: #6b7280;
+}
+
+.btn-secondary:hover {
+  @apply border-primary-500 text-primary-600; /* легкий акцент при наведении */
+}
+
+.btn-danger {
+  @apply btn btn-error py-2 px-6 rounded-md;
+  background-color: #f87171;
+  color: white;
+}
+
+.btn-danger:hover {
+  @apply bg-red-500; /* светлый оттенок красного при наведении */
+}
+
+/* links */
+a {
+  @apply text-primary-700;
+}
+
+a:hover {
+  @apply text-primary-600; /* чуть темнее на ховере */
+}
+
+/* additional layout improvements */
+body {
+  @apply bg-gray-100; /* еще более светлый фон для всей страницы */
+  font-family: 'Inter', sans-serif; /* современный шрифт */
+}
+
+footer {
+  @apply bg-gray-200 text-gray-800 py-4; /* светлый футер с темным текстом */
+  font-size: 14px;
+}
+
+footer a {
+  @apply text-gray-500;
+}
+
+footer a:hover {
+  @apply text-primary-600;
+}
+
+/* responsive design */
+@media (max-width: 768px) {
+  .container {
+    @apply px-4; /* уменьшение отступов для мобильных устройств */
+  }
+
+  .card-custom {
+    @apply p-4; /* уменьшение отступов внутри карточки */
+  }
+}

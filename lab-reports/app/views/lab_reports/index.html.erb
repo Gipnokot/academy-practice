@@ -1,7 +1,23 @@
-<h1>Lab reports:</h1>
+<h1 class="text-4xl font-bold text-center text-primary-700 mb-8">Lab Reports</h1>
 
-<% @lab_reports.each do |lab| %>
-<p><% lab.title %></p>
-<p><% lab.description %></p>
-<p><% lab.grade %></p>
-<% end %>
+<div class="space-y-8">
+  <% @lab_reports.each do |lab| %>
+    <div class="card bg-base-200 shadow-lg hover:shadow-xl transition-shadow duration-300 p-6 rounded-lg">
+      <div class="card-body">
+        <h2 class="card-title text-xl font-semibold text-secondary-700 mb-2"><%= lab.title %></h2>
+        <p class="text-gray-600 mb-4"><%= lab.description %></p>
+        <p class="font-medium text-gray-700 mb-4"><strong>Grade:</strong> <%= lab.grade || 'Not Rated' %></p>
+        <p class="text-gray-700"><strong>Author:</strong> <%= lab.user.first_name %> <%= lab.user.last_name %></p>
+
+        <div class="mt-6 flex gap-4">
+          <%= link_to 'Edit', edit_lab_report_path(lab), class: "btn btn-primary flex-1 py-2 px-4 rounded-lg text-lg shadow-lg hover:shadow-xl" %>
+          <%= link_to 'Back', lab_reports_path, class: "btn btn-secondary flex-1 py-2 px-4 rounded-lg text-lg" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="text-center mt-8">
+    <%= link_to "Add Lab Report", new_lab_report_path, class: "btn btn-secondary text-lg py-3 px-8 rounded-lg shadow-lg hover:shadow-xl" %>
+  </div>
+</div>

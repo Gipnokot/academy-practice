@@ -9,6 +9,7 @@ class LabReportsController < ApplicationController
 
   def new
     @lab_report = LabReport.new
+    @users = User.all
   end
 
   def create
@@ -16,22 +17,26 @@ class LabReportsController < ApplicationController
     if @lab_report.save
       redirect_to @lab_report, notice: "Lab report successfully created"
     else
+      @users = User.all
       render :new, status: :unprocessable_entity
     end
   end
 
-  def edit; end
+  def edit
+    @users = User.all
+  end
 
   def update
     if @lab_report.update(lab_report_params)
       redirect_to @lab_report, notice: "Lab report successfully updated"
     else
+      @users = User.all
       render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
-    @lab_report.destroy.destroy
+    @lab_report.destroy
     redirect_to lab_reports_url, notice: "Lab report deleted"
   end
 
@@ -42,6 +47,6 @@ class LabReportsController < ApplicationController
   end
 
   def lab_report_params
-    params.require(:lab_report).permit(:title, :description, :grade)
+    params.require(:lab_report).permit(:title, :description, :grade, :user_id)
   end
 end
