@@ -1,16 +1,17 @@
-<h1 class="text-4xl font-bold text-center mb-10 text-primary-700">All Users</h1>
+<h1 class="text-4xl font-bold text-center mb-10 text-blue-700">All Users</h1>
 
 <div class="container mx-auto px-6">
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
     <% @users.each do |user| %>
-      <div class="card bg-white shadow-lg hover:shadow-2xl transition-shadow duration-300 p-6 rounded-xl">
-        <div class="card-body">
-          <h2 class="card-title text-xl font-semibold text-primary-800"><%= user.first_name %> <%= user.last_name %></h2>
-          <p class="text-gray-600 mb-4"><%= user.email %></p>
+      <div class="bg-white border border-gray-300 shadow-md hover:shadow-lg transition-shadow duration-300 p-6 rounded-xl">
+        <div>
+          <h2 class="text-xl font-semibold text-green-700"><%= user.first_name %> <%= user.last_name %></h2>
+          <p class="text-gray-900 mb-4"><%= user.email %></p>
 
-          <div class="mt-4 flex gap-4 justify-center">
-            <%= link_to "Edit", edit_user_path(user), class: "btn btn-secondary py-2 px-6 rounded-md" %>
-            <%= button_to "Delete", user_path(user), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-error py-2 px-6 rounded-md" %>
+          <div class="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-3">
+            <%= link_to "Edit", edit_user_path(user), class: "btn bg-blue-500 text-white py-2 px-4 rounded-lg shadow-md hover:bg-blue-600 hover:scale-105 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 text-center" %>
+            <%= button_to "Delete", user_path(user), method: :delete, data: { confirm: "Are you sure?" }, class: "btn bg-red-500 text-white py-2 px-4 rounded-lg shadow-md hover:bg-red-600 hover:scale-105 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 text-center" %>
+            <%= link_to "Labreports", user_path(user), class: "btn bg-gray-500 text-white py-2 px-4 rounded-lg shadow-md hover:bg-gray-600 hover:scale-105 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50 text-center" %>
           </div>
         </div>
       </div>
@@ -18,6 +19,6 @@
   </div>
 
   <div class="flex justify-center mt-8">
-    <%= link_to "Add User", new_user_path, class: "btn btn-primary text-lg px-6 py-3 shadow-xl hover:shadow-2xl rounded-md" %>
+    <%= link_to "Add User", new_user_path, class: "btn bg-green-500 text-white py-3 px-6 rounded-lg shadow-md hover:bg-green-600 hover:scale-105 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 text-lg" %>
   </div>
 </div>

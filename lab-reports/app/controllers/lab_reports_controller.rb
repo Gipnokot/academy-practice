@@ -2,7 +2,7 @@ class LabReportsController < ApplicationController
   before_action :set_lab_report, only: %w[show edit update destroy]
 
   def index
-    @lab_reports = LabReport.all
+    @lab_reports = LabReport.includes(:user).all
   end
 
   def show; end

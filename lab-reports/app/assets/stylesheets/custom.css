@@ -81,7 +81,7 @@ a:hover {
 
 /* additional layout improvements */
 body {
-  @apply bg-gray-100; /* еще более светлый фон для всей страницы */
+  /* @apply bg-gray-100; еще более светлый фон для всей страницы */
   font-family: 'Inter', sans-serif; /* современный шрифт */
 }
 
