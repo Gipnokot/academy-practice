@@ -1,5 +1,6 @@
 class LabReportsController < ApplicationController
   before_action :set_lab_report, only: %w[show edit update destroy]
+  before_action :load_users, only: %w[new create]
 
   def index
     @lab_reports = LabReport.includes(:user).paginate(page: params[:page], per_page: 5)
@@ -9,7 +10,6 @@ class LabReportsController < ApplicationController
 
   def new
     @lab_report = LabReport.new
-    @users = User.all
   end
 
   def create
@@ -17,20 +17,16 @@ class LabReportsController < ApplicationController
     if @lab_report.save
       redirect_to @lab_report, notice: "Lab report successfully created"
     else
-      @users = User.all
       render :new, status: :unprocessable_entity
     end
   end
 
-  def edit
-    @users = User.all
-  end
+  def edit; end
 
   def update
     if @lab_report.update(lab_report_params)
       redirect_to @lab_report, notice: "Lab report successfully updated"
     else
-      @users = User.all
       render :edit, status: :unprocessable_entity
     end
   end
@@ -44,6 +40,10 @@ class LabReportsController < ApplicationController
 
   def set_lab_report
     @lab_report = LabReport.find(params[:id])
+  end
+
+  def load_users
+    @users = User.select(:id, :first_name, :last_name).order(:first_name)
   end
 
   def lab_report_params

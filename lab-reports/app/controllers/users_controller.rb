@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @lab_reports = @user.lab_reports
+    @lab_reports = @user.lab_reports.includes(:user)
   end
 
   def new
@@ -34,7 +34,7 @@ class UsersController < ApplicationController
 
   def destroy
     @user.destroy
-    flash.now[:notice] = "User was successfully deleted."
+    flash[:notice] = "User was successfully deleted."
     redirect_to users_url
   end
 
