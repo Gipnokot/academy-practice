@@ -2,7 +2,7 @@ class LabReportsController < ApplicationController
   before_action :set_lab_report, only: %w[show edit update destroy]
 
   def index
-    @lab_reports = LabReport.includes(:user).all
+    @lab_reports = LabReport.includes(:user).paginate(page: params[:page], per_page: 5)
   end
 
   def show; end

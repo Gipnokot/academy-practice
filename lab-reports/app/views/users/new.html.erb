@@ -3,6 +3,18 @@
 <div class="max-w-lg mx-auto bg-white border border-gray-300 p-8 rounded-lg shadow-lg">
   <%= form_with model: @user, local: true do |f| %>
 
+    <!-- Ошибки валидации -->
+    <% if @user.errors.any? %>
+      <div class="bg-red-100 text-red-700 p-4 rounded-lg mb-6">
+        <strong class="font-bold">There were some errors with your submission:</strong>
+        <ul class="list-disc pl-6">
+          <% @user.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
     <!-- First Name -->
     <div class="form-control mb-4">
       <div class="input-group">
