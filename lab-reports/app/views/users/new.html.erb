@@ -1,0 +1,51 @@
+<h1 class="text-4xl font-bold text-center mb-8 text-blue-700">Create User</h1>
+
+<div class="max-w-lg mx-auto bg-white border border-gray-300 p-8 rounded-lg shadow-lg">
+  <%= form_with model: @user, local: true do |f| %>
+
+    <!-- Ошибки валидации -->
+    <% if @user.errors.any? %>
+      <div class="bg-red-100 text-red-700 p-4 rounded-lg mb-6">
+        <strong class="font-bold">There were some errors with your submission:</strong>
+        <ul class="list-disc pl-6">
+          <% @user.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <!-- First Name -->
+    <div class="form-control mb-4">
+      <div class="input-group">
+        <span class="input-group-text bg-gray-100 text-gray-600"><i class="fas fa-user"></i></span>
+        <%= f.label :first_name, "First Name", class: "label font-semibold text-gray-800" %>
+        <%= f.text_field :first_name, required: true, class: "input input-bordered w-full border-gray-300 bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+      </div>
+    </div>
+
+    <!-- Last Name -->
+    <div class="form-control mb-4">
+      <div class="input-group">
+        <span class="input-group-text bg-gray-100 text-gray-600"><i class="fas fa-user"></i></span>
+        <%= f.label :last_name, "Last Name", class: "label font-semibold text-gray-800" %>
+        <%= f.text_field :last_name, required: true, class: "input input-bordered w-full border-gray-300 bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+      </div>
+    </div>
+
+    <!-- Email -->
+    <div class="form-control mb-4">
+      <div class="input-group">
+        <span class="input-group-text bg-gray-100 text-gray-600"><i class="fas fa-envelope"></i></span>
+        <%= f.label :email, "Email", class: "label font-semibold text-gray-800" %>
+        <%= f.email_field :email, required: true, class: "input input-bordered w-full border-gray-300 bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+      </div>
+    </div>
+
+    <!-- Submit and Back Buttons -->
+    <div class="flex justify-between gap-4 mt-6">
+      <%= f.submit "Create User", class: "btn bg-green-500 text-white py-2 px-6 rounded-md shadow-md hover:bg-green-600 hover:scale-105 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50" %>
+      <%= link_to "Back", users_path, class: "bg-gray-600 text-white py-2 px-6 rounded-md shadow-md hover:bg-gray-700 hover:scale-105 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50" %>
+    </div>
+  <% end %>
+</div>

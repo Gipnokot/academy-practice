@@ -1,0 +1,30 @@
+{
+  "devDependencies": {
+    "daisyui": "^5.0.0-beta.9"
+  },
+  "name": "lab-reports",
+  "description": "This README would normally document whatever steps are necessary to get the application up and running.",
+  "version": "1.0.0",
+  "main": "tailwind.config.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "dependencies": {
+    "camelcase-css": "^2.0.1",
+    "css-selector-tokenizer": "^0.8.0",
+    "cssesc": "^3.0.0",
+    "culori": "^3.3.0",
+    "fastparse": "^1.1.2",
+    "nanoid": "^3.3.8",
+    "picocolors": "^1.1.1",
+    "postcss": "^8.5.3",
+    "postcss-js": "^4.0.1",
+    "source-map-js": "^1.2.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

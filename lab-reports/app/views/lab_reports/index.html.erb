@@ -1,0 +1,36 @@
+<h1 class="text-4xl font-bold text-center text-blue-700 mb-8">Lab Reports</h1>
+
+<div class="space-y-8">
+  <% @lab_reports.each do |lab| %>
+    <div class="bg-white border border-gray-300 shadow-md hover:shadow-lg transition-shadow duration-300 p-6 rounded-lg">
+      <h2 class="text-xl font-semibold text-green-700 mb-2"><%= lab.title %></h2>
+      <p class="text-gray-900 mb-4"><%= lab.description %></p>
+      <p class="font-medium text-gray-900 mb-4"><strong>Grade:</strong> <%= lab.grade || 'Not Rated' %></p>
+      <p class="text-gray-900"><strong>Author:</strong> <%= link_to "#{lab.user.first_name} #{lab.user.last_name}", user_path(lab.user), class: "text-blue-600 hover:text-blue-800 hover:underline focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 hover:bg-blue-100 hover:rounded-md transition-all duration-300 p-1" %></p>
+      
+      <div class="mt-6 flex gap-4">
+        <%= link_to 'Edit', edit_lab_report_path(lab), class: "btn bg-green-500 text-white py-2 px-6 rounded-md shadow-md hover:bg-green-600 hover:scale-105 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50" %>
+        <%= button_to "Delete", lab_report_path(lab), method: :delete, class: "btn bg-red-500 text-white py-2 px-4 rounded-lg shadow-md hover:bg-red-600 hover:scale-105 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 text-center" %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<div class="mt-8 text-center">
+  <% if @lab_reports.total_pages > 1 %>
+    <div class="inline-block p-4 bg-blue-100 rounded-xl shadow-md dark:bg-gray-800">
+      <%= will_paginate @lab_reports,
+          previous_label: '← Prev',
+          next_label: 'Next →',
+          class: 'flex items-center gap-2',
+          link_class: 'btn btn-outline btn-sm text-gray-700 hover:bg-blue-500 hover:text-white transition-colors duration-200 dark:text-gray-300 dark:hover:bg-blue-600',
+          disabled_class: 'btn btn-sm btn-disabled text-gray-400 cursor-not-allowed',
+          active_class: 'btn btn-sm btn-primary bg-blue-600 text-white hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600'
+      %>
+    </div>
+  <% end %>
+</div>
+
+<div class="text-center mt-8">
+  <%= link_to "Add Lab Report", new_lab_report_path, class: "btn bg-green-500 text-white py-3 px-6 rounded-lg shadow-md hover:bg-green-600 hover:scale-105 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 text-lg" %>
+</div>

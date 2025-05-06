@@ -1,0 +1,39 @@
+<h1 class="text-4xl font-bold text-center mb-10 text-blue-700">All Users</h1>
+
+<div class="container mx-auto px-6">
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <% @users.each do |user| %>
+      <div class="bg-white border border-gray-300 shadow-md hover:shadow-lg transition-shadow duration-300 p-6 rounded-xl">
+        <div>
+          <h2 class="text-xl font-semibold text-green-700"><%= user.first_name %> <%= user.last_name %></h2>
+          <p class="text-gray-900 mb-4"><%= user.email %></p>
+
+          <div class="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-3">
+            <%= link_to "Edit", edit_user_path(user), class: "btn bg-blue-500 text-white py-2 px-4 rounded-lg shadow-md hover:bg-blue-600 hover:scale-105 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 text-center" %>
+            <%= button_to "Delete", user_path(user), method: :delete, data: { confirm: "Are you sure?" }, class: "btn bg-red-500 text-white py-2 px-4 rounded-lg shadow-md hover:bg-red-600 hover:scale-105 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 text-center" %>
+            <%= link_to "Show", user_path(user), class: "btn bg-blue-500 text-white py-2 px-4 rounded-lg shadow-md hover:bg-blue-600 hover:scale-105 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 text-center mr-4" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+<div class="mt-8 text-center">
+  <% if @users.total_pages > 1 %>
+    <div class="inline-block p-4 bg-blue-100 rounded-xl shadow-md dark:bg-gray-800">
+      <%= will_paginate @users,
+          previous_label: '← Prev',
+          next_label: 'Next →',
+          class: 'flex items-center gap-2',
+          link_class: 'btn btn-outline btn-sm text-gray-700 hover:bg-blue-500 hover:text-white transition-colors duration-200 dark:text-gray-300 dark:hover:bg-blue-600',
+          disabled_class: 'btn btn-sm btn-disabled text-gray-400 cursor-not-allowed',
+          active_class: 'btn btn-sm btn-primary bg-blue-600 text-white hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600'
+      %>
+    </div>
+  <% end %>
+</div>
+
+  <div class="flex justify-center mt-8">
+    <%= link_to "Add User", new_user_path, class: "btn bg-green-500 text-white py-3 px-6 rounded-lg shadow-md hover:bg-green-600 hover:scale-105 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 text-lg" %>
+  </div>
+</div>

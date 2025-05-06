@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%= render 'layouts/head' %>
+</head>
+<body class="flex flex-col min-h-screen bg-white">
+
+  <!-- nav -->
+  <%= render 'layouts/navigation' %>
+
+  <!-- content -->
+  <main class="container mx-auto mt-16 px-5 sm:px-10 max-w-screen-lg animate-fade-in flex-1">
+    <%= yield %>
+  </main>
+
+  <!-- footer -->
+  <%= render 'layouts/footer' %>
+
+</body>
+</html>
